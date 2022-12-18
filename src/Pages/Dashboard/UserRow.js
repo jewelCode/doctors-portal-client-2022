@@ -4,7 +4,7 @@ import { toast } from 'react-toastify';
 const UserRow = ({ user, refetch }) => {
     const { email, role } = user;
     const makeAdmin = () => {
-        fetch(`http://localhost:5000/user/admin/${email}`, {
+        fetch(`https://doctors-portal-server-2022.vercel.app/user/admin/${email}`, {
             method: 'PUT',
             headers: {
                 authorization: `Bearer ${localStorage.getItem("accessToken")}`
@@ -12,7 +12,7 @@ const UserRow = ({ user, refetch }) => {
 
         })
             .then(res => {
-                if(res.status === 403){
+                if (res.status === 403) {
                     toast.error("Failed to Make an Admin")
                 }
                 return res.json()

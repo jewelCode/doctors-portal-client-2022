@@ -12,7 +12,7 @@ const MyAppointments = () => {
 
     useEffect(() => {
         if (user) {
-            fetch(`http://localhost:5000/booking?patient=${user.email}`, {
+            fetch(`https://doctors-portal-server-2022.vercel.app/booking?patient=${user.email}`, {
                 method: "GET",
                 headers: {
                     "authorization": `Bearer ${localStorage.getItem("accessToken")}`
@@ -20,7 +20,7 @@ const MyAppointments = () => {
             })
                 .then(res => {
                     console.log("res", res);
-                    if(res.status === 401 || res.status === 403){
+                    if (res.status === 401 || res.status === 403) {
                         signOut(auth);
                         localStorage.removeItem("accessToken")
                         navigate("/")
@@ -28,7 +28,7 @@ const MyAppointments = () => {
                     return res.json()
                 })
                 .then(data => {
-                    
+
                     setAppointments(data)
                 })
         }
@@ -50,7 +50,7 @@ const MyAppointments = () => {
                     </thead>
                     <tbody>
                         {
-                            appointments.map((appointment, index) =><tr>
+                            appointments.map((appointment, index) => <tr>
                                 <th>{index + 1}</th>
                                 <td>{appointment.patientName}</td>
                                 <td>{appointment.date}</td>
@@ -58,7 +58,7 @@ const MyAppointments = () => {
                                 <td>{appointment.treatment}</td>
                             </tr>)
                         }
-                        
+
                     </tbody>
                 </table>
             </div>
